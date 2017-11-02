@@ -9,7 +9,7 @@ These scripts are for building the kernel for the 64-bit L4T 28.1 (Ubuntu 16.04 
 
 Downloads the kernel sources for L4T 28.1 from the NVIDIA website, decompresses them and opens a graphical editor on the .config file. In editor, select General Setup/Local Version - append to kernel release, and change name of the kernel to match you kenel name (e.g -jetsonTX). 
 
-Following SR300 patch by realsense from https://www.spinics.net/lists/linux-media/msg108702.html, add following lines if not present:
+To add support of INZI pixel format for realsense SR300, follow the patch by realsense from https://www.spinics.net/lists/linux-media/msg108702.html and add following lines if not present:
 
 usr/src/kernel/kernel-4.4/drivers/media/usb/uvc/uvcvideo.h in GUIDs macros:
 
