@@ -7,7 +7,47 @@ These scripts are for building the kernel for the 64-bit L4T 28.1 (Ubuntu 16.04 
 
 <strong>getKernelSources.sh</strong>
 
-Downloads the kernel sources for L4T 28.1 from the NVIDIA website, decompresses them and opens a graphical editor on the .config file. 
+Downloads the kernel sources for L4T 28.1 from the NVIDIA website, decompresses them and opens a graphical editor on the .config file. In editor, select General Setup/Local Version - append to kernel release, and change name of the kernel to match you kenel name (e.g -jetsonTX). 
+
+Following SR300 patch by realsense from https://www.spinics.net/lists/linux-media/msg108702.html, add following lines if not present:
+
+usr/src/kernel/kernel-4.4/drivers/media/usb/uvc/uvcvideo.h in GUIDs macros:
+
+    #define UVC_GUID_FORMAT_INVZ \
+      { 'I',  'N',  'V',  'Z', 0x90, 0x2d, 0x58, 0x4a, \
+       0x92, 0x0b, 0x77, 0x3f, 0x1f, 0x2c, 0x55, 0x6b}
+    #define UVC_GUID_FORMAT_INZI \
+      { 'I',  'N',  'Z',  'I', 0x66, 0x1a, 0x42, 0xa2, \
+       0x90, 0x65, 0xd0, 0x18, 0x14, 0xa8, 0xef, 0x8a}
+    #define UVC_GUID_FORMAT_INVI \
+      { 'I',  'N',  'V',  'I', 0xdb, 0x57, 0x49, 0x5e, \
+       0x8e, 0x3f, 0xf4, 0x79, 0x53, 0x2b, 0x94, 0x6f}
+
+
+usr/src/kernel/kernel-4.4/drivers/media/usb/uvc/uvcvideo.h inside uvc_format_desc uvc_fmts[] struct:
+
+	{
+		.name		= "Depth data 16-bit (Z16)",
+		.guid		= UVC_GUID_FORMAT_INVZ,
+		.fcc		= V4L2_PIX_FMT_Z16,
+	},
+	{
+		.name		= "IR:Depth 26-bit (INZI)",
+		.guid		= UVC_GUID_FORMAT_INZI,
+		.fcc		= V4L2_PIX_FMT_INZI,
+	},
+	{
+		.name		= "Greyscale 10-bit (Y10 )",
+		.guid		= UVC_GUID_FORMAT_INVI,
+		.fcc		= V4L2_PIX_FMT_Y10,
+	},
+
+
+/usr/src/kernel/kernel-4.4/include/uapi/linux/videodev2.h inside Vendor-specific formats macros:
+
+    #define V4L2_PIX_FMT_MT21C    v4l2_fourcc('M', 'T', '2', '1') /* Mediatek compressed block mode  */
+    #define V4L2_PIX_FMT_INZI     v4l2_fourcc('I', 'N', 'Z', 'I') /* Intel Infrared 10-bit linked with Depth 16-bit */
+
 
 <strong>makeKernel.sh</strong>
 
