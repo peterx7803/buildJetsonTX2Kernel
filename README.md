@@ -24,7 +24,7 @@ usr/src/kernel/kernel-4.4/drivers/media/usb/uvc/uvcvideo.h in GUIDs macros:
        0x8e, 0x3f, 0xf4, 0x79, 0x53, 0x2b, 0x94, 0x6f}
 
 
-usr/src/kernel/kernel-4.4/drivers/media/usb/uvc/uvcvideo.h inside uvc_format_desc uvc_fmts[] struct:
+usr/src/kernel/kernel-4.4/drivers/media/usb/uvc/uvc_driver.c inside uvc_format_desc uvc_fmts[] struct:
 
 	{
 		.name		= "Depth data 16-bit (Z16)",
