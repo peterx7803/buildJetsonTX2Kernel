@@ -1,13 +1,13 @@
 # buildJetsonTX2Kernel
-Scripts to help build the 4.4.38 kernel and modules onboard the Jetson TX2 (L4T 28.1, JetPack 3.1). For previous versions, visit the 'tags' section.
+Scripts to help build the 4.4.38 kernel and modules onboard the Jetson TX2 (L4T 28.2, JetPack 3.2). For previous versions, visit the 'tags' section.
 
 As of this writing, the "official" way to build the Jetson TX2 kernel is to use a cross compiler on a Linux PC. This is an alternative which builds the kernel onboard the Jetson itself. These scripts will download the kernel source to the Jetson TX2, wrangle some of the Makefiles to make them work on the Jetson, and then compile the kernel and selected modules. The newly compiled kernel can then be installed.
 
-These scripts are for building the kernel for the 64-bit L4T 28.1 (Ubuntu 16.04 based) operating system on the NVIDIA Jetson TX2. The scripts should be run directly after flashing the Jetson with L4T 28.1 from a host PC. There are three scripts:
+These scripts are for building the kernel for the 64-bit L4T 28.2 (Ubuntu 16.04 based) operating system on the NVIDIA Jetson TX2. The scripts should be run directly after flashing the Jetson with L4T 28.2 from a host PC. There are three scripts:
 
 <strong>getKernelSources.sh</strong>
 
-Downloads the kernel sources for L4T 28.1 from the NVIDIA website, decompresses them and opens a graphical editor on the .config file. In editor, select General Setup/Local Version - append to kernel release, and change name of the kernel to match you kenel name (e.g -jetsonTX). 
+Downloads the kernel sources for L4T 28.2 from the NVIDIA website, decompresses them and opens a graphical editor on the .config file. In editor, select General Setup/Local Version - append to kernel release, and change name of the kernel to match you kenel name (e.g -jetsonTX). 
 
 To add support of INZI pixel format for realsense SR300, follow the patch by realsense from https://www.spinics.net/lists/linux-media/msg108702.html and add following lines if not present:
 
